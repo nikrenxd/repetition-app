@@ -11,9 +11,9 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
     # Authentication
-    path("api/auth/login", views.LoginView.as_view(), name="login"),
-    path("api/auth/refresh", get_refresh_view().as_view(), name="token_refresh"),
-    path("api/auth/logout", views.LogoutView.as_view(), name="logout"),
+    path("api/auth/login/", views.LoginView.as_view(), name="login"),
+    path("api/auth/refresh/", get_refresh_view().as_view(), name="token_refresh"),
+    path("api/auth/logout/", views.LogoutView.as_view(), name="logout"),
 ]
 
 if settings.DEBUG:

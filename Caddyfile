@@ -1,0 +1,5 @@
+{$DOMAIN} {
+    handle {
+        reverse_proxy localhost:{$APP_PORT}
+    }
+}

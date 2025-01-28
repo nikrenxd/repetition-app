@@ -102,7 +102,7 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": redis_config.redis_url,
     }
 }
@@ -150,7 +150,7 @@ STATIC_ROOT = BASE_DIR / "src/staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "users.User"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
@@ -208,10 +208,5 @@ LOGGING = {
         },
     },
     "loggers": {
-        "src.apps.locations": {
-            "level": "DEBUG",
-            "handlers": ["console"],
-            "propagate": False,
-        },
     },
 }
