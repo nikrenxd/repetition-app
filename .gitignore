@@ -1,0 +1,7 @@
+.env
+.env.db
+dev.env
+.venv
+.DS_Store
+__pycache__
+.idea
