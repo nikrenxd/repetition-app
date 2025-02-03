@@ -174,7 +174,7 @@ SIMPLE_JWT = {
 }
 
 REST_AUTH = {
-    "LOGIN_SERIALIZER": "src.apps.users.serializers.EmailLoginSerializer",
+    "LOGIN_SERIALIZER": "src.apps.users.api.serializers.EmailLoginSerializer",
     "USE_JWT": True,
     "JWT_AUTH_COOKIE": "access_token",
     "JWT_AUTH_REFRESH_COOKIE": "refresh_token",
@@ -190,7 +190,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "simple": {
-            "format": "{levelname} {asctime} {name} {module} {message}",
+            "format": "{levelname} {asctime} {module} {message}",
             "style": "{",
         },
     },
@@ -208,5 +208,10 @@ LOGGING = {
         },
     },
     "loggers": {
+        "src.apps.users": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": False,
+        }
     },
 }
