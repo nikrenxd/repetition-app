@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "silk",
     # local
     "src.apps.users",
+    "src.apps.decks",
 ]
 
 MIDDLEWARE = [
