@@ -4,7 +4,7 @@ from django.db.models import QuerySet
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
-from src.apps.users.api.serializers import UserCreateSerializer
+from src.apps.users.api.serializers import UserCreateSerializer, UserSerializer
 from src.apps.users.services import UserService
 from src.common.mixins import CreateRetrieveUpdateMixin
 
@@ -15,13 +15,19 @@ class UserViewSet(GenericViewSet, CreateRetrieveUpdateMixin):
     """User CRUD endpoints"""
 
     queryset = User.objects.all()
-    serializer_class = UserCreateSerializer
+    serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         qs: QuerySet = super().get_queryset()
 
         return qs.filter(id=self.request.user.id)
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return UserCreateSerializer
+
+        return super().get_serializer_class()
 
     def get_permissions(self):
         if self.action == "create":

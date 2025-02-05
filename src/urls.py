@@ -13,6 +13,7 @@ urlpatterns = [
     path("api/auth/refresh/", get_refresh_view().as_view(), name="token_refresh"),
     path("api/auth/logout/", views.LogoutView.as_view(), name="logout"),
     path("api/", include("src.apps.users.api.urls")),
+    path("api/", include("src.apps.decks.api.urls")),
 ]
 
 # Docs urls
