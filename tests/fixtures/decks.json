@@ -1,0 +1,13 @@
+[
+   {
+      "model":"decks.deck",
+      "pk":1,
+      "fields":{
+         "created_at":"2025-02-05T14:11:45.825Z",
+         "name":"test deck",
+         "description":null,
+         "completed":false,
+         "user":1
+      }
+   }
+]
