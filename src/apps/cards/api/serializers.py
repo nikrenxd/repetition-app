@@ -12,4 +12,4 @@ class CardSerializer(serializers.ModelSerializer):
 class CardCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
-        field = ("question", "answer",)
+        fields = ("question", "answer", "deck")
