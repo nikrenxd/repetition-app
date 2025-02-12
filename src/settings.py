@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # local
     "src.apps.users",
     "src.apps.decks",
+    "src.apps.cards",
 ]
 
 MIDDLEWARE = [

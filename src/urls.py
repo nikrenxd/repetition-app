@@ -14,6 +14,7 @@ urlpatterns = [
     path("api/auth/logout/", views.LogoutView.as_view(), name="logout"),
     path("api/", include("src.apps.users.api.urls")),
     path("api/", include("src.apps.decks.api.urls")),
+    path("api/", include("src.apps.cards.api.urls")),
 ]
 
 # Docs urls
