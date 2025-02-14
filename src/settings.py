@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "src.apps.users",
     "src.apps.decks",
     "src.apps.cards",
+    "src.apps.notes",
 ]
 
 MIDDLEWARE = [
