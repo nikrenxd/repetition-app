@@ -15,6 +15,7 @@ urlpatterns = [
     path("api/", include("src.apps.users.api.urls")),
     path("api/", include("src.apps.decks.api.urls")),
     path("api/", include("src.apps.cards.api.urls")),
+    path("api/", include("src.apps.notes.api.urls")),
 ]
 
 # Docs urls

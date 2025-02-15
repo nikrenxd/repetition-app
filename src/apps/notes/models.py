@@ -10,3 +10,7 @@ class Note(TimeStampedModel):
         related_name="notes",
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        verbose_name = "note"
+        verbose_name_plural = "notes"
