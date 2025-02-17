@@ -23,7 +23,10 @@ class TestNotesApi:
         assert response.status_code == 200
 
     def test_notes_update(self, authenticated_client):
-        data = {"content": "note 1"}
+        data = {
+            "content": "note 1",
+            "card": 1,
+        }
         response = authenticated_client.patch(
             reverse("notes-detail", kwargs={"pk": 1}), data=data
         )
@@ -31,6 +34,8 @@ class TestNotesApi:
         assert response.status_code == 200
 
     def test_notes_delete(self, authenticated_client):
-        response = authenticated_client.delete(reverse("notes-detail", kwargs={"pk": 1}))
+        response = authenticated_client.delete(
+            reverse("notes-detail", kwargs={"pk": 1})
+        )
 
         assert response.status_code == 204

@@ -28,6 +28,7 @@ class TestCardAPI:
     def test_cards_update(self, authenticated_client):
         data = {
             "question": "updated question",
+            "deck": 1,
         }
 
         response = authenticated_client.patch(
