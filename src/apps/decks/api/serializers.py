@@ -1,22 +1,26 @@
 from rest_framework import serializers
 
+from src.apps.cards.api.serializers import CardSerializer
 from src.apps.decks.models import Deck
 
 
 class DeckSerializer(serializers.ModelSerializer):
-    # TODO: Field for count cards in deck
+    cards_count = serializers.SerializerMethodField()
+
+    def get_cards_count(self, deck):
+        return deck.cards.count()
 
     class Meta:
         model = Deck
-        fields = ("id", "name", "completed")
+        fields = ("id", "name", "completed", "cards_count")
 
 
 class DeckRetrieveSerializer(serializers.ModelSerializer):
-    # TODO: Field for cards in deck
+    cards = CardSerializer(many=True)
 
     class Meta:
         model = Deck
-        fields = ("name", "description")
+        fields = ("name", "description", "cards")
 
 
 class DeckCreateSerializer(serializers.ModelSerializer):
