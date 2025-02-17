@@ -8,7 +8,7 @@ from src.apps.decks.models import Deck
 from src.common.mixins import OwnObjectMixin
 
 
-class CardViewSet(ModelViewSet, OwnObjectMixin):
+class CardViewSet(OwnObjectMixin, ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
     permission_classes = (IsAuthenticated,)
