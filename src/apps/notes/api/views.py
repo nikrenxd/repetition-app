@@ -2,16 +2,15 @@ from django.db.models import QuerySet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from src.apps.cards.models import Card
 from src.apps.notes.api.serializers import NoteSerializer
 from src.apps.notes.models import Note
-from src.common.mixins import OwnObjectMixin
+from src.apps.notes.permissions import NoteCurrentUserOwnCardPermission
 
 
-class NotesViewSet(OwnObjectMixin, ModelViewSet):
+class NotesViewSet(ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, NoteCurrentUserOwnCardPermission)
 
     def get_queryset(self):
         qs: QuerySet = super().get_queryset()
@@ -19,9 +18,4 @@ class NotesViewSet(OwnObjectMixin, ModelViewSet):
         return qs.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        self.own_object("card", Card)
         serializer.save(user=self.request.user)
-
-    def perform_update(self, serializer):
-        self.own_object("card", Card)
-        super().perform_update(serializer)

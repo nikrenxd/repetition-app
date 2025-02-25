@@ -4,14 +4,13 @@ from rest_framework.permissions import IsAuthenticated
 
 from src.apps.cards.api.serializers import CardSerializer, CardCreateSerializer
 from src.apps.cards.models import Card
-from src.apps.decks.models import Deck
-from src.common.mixins import OwnObjectMixin
+from src.apps.cards.permissions import CardCurrentUserOwnDeckPermission
 
 
-class CardViewSet(OwnObjectMixin, ModelViewSet):
+class CardViewSet(ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, CardCurrentUserOwnDeckPermission)
 
     def get_queryset(self):
         qs: QuerySet = super().get_queryset()
@@ -25,9 +24,4 @@ class CardViewSet(OwnObjectMixin, ModelViewSet):
         return super().get_serializer_class()
 
     def perform_create(self, serializer):
-        self.own_object("deck", Deck)
         serializer.save(user=self.request.user)
-
-    def perform_update(self, serializer):
-        self.own_object("deck", Deck)
-        super().perform_update(serializer)
