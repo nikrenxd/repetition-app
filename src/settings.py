@@ -193,7 +193,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "simple": {
-            "format": "{levelname} {asctime} {module} {message}",
+            "format": "{levelname} {asctime} {name} {module} {message}",
             "style": "{",
         },
     },
@@ -215,6 +215,11 @@ LOGGING = {
             "level": "INFO",
             "handlers": ["console"],
             "propagate": False,
-        }
+        },
+        "src.apps.cards": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": False,
+        },
     },
 }

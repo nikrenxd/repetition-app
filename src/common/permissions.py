@@ -7,6 +7,9 @@ class CurrentUserOwnObjectPermission(permissions.BasePermission):
     model = None
 
     def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
         obj_id = request.data.get(self.obj_name_in_request, None)
 
         if not obj_id:
