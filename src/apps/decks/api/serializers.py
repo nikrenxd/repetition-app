@@ -23,7 +23,7 @@ class DeckRetrieveSerializer(serializers.ModelSerializer):
         fields = ("name", "description", "cards")
 
 
-class DeckCreateSerializer(serializers.ModelSerializer):
+class DeckCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deck
         fields = ("name", "description")

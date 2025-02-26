@@ -11,7 +11,7 @@ class CardSerializer(serializers.ModelSerializer):
         fields = ("id", "question", "answer", "answered")
 
 
-class CardCreateSerializer(serializers.ModelSerializer):
+class CardCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
         fields = ("question", "answer", "deck")

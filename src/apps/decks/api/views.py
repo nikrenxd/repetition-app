@@ -1,7 +1,11 @@
 from django.db.models import QuerySet
 from rest_framework import viewsets, permissions
 
-from src.apps.decks.api.serializers import DeckSerializer, DeckCreateSerializer, DeckRetrieveSerializer
+from src.apps.decks.api.serializers import (
+    DeckSerializer,
+    DeckCreateUpdateSerializer,
+    DeckRetrieveSerializer,
+)
 from src.apps.decks.models import Deck
 
 
@@ -17,7 +21,7 @@ class DeckViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "create" or self.action == "partial_update":
-            return DeckCreateSerializer
+            return DeckCreateUpdateSerializer
         if self.action == "retrieve":
             return DeckRetrieveSerializer
 
