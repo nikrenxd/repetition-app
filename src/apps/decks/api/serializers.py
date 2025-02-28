@@ -5,10 +5,7 @@ from src.apps.decks.models import Deck
 
 
 class DeckSerializer(serializers.ModelSerializer):
-    cards_count = serializers.SerializerMethodField(method_name="get_cards_count")
-
-    def get_cards_count(self, deck):
-        return deck.cards.count()
+    cards_count = serializers.IntegerField(source="cards_num")
 
     class Meta:
         model = Deck
