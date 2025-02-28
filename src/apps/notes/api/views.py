@@ -11,6 +11,7 @@ class NotesViewSet(ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     permission_classes = (IsAuthenticated, NoteCurrentUserOwnCardPermission)
+    http_method_names = ["get", "post", "delete", "patch"]
 
     def get_queryset(self):
         qs: QuerySet = super().get_queryset()

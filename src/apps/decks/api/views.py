@@ -13,6 +13,7 @@ class DeckViewSet(viewsets.ModelViewSet):
     queryset = Deck.objects.all()
     serializer_class = DeckSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    http_method_names = ["get", "post", "delete", "patch"]
 
     def get_queryset(self):
         qs: QuerySet = super().get_queryset()

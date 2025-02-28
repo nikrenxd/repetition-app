@@ -12,11 +12,10 @@ User = get_user_model()
 
 
 class UserViewSet(GenericViewSet, CreateRetrieveUpdateMixin):
-    """User CRUD endpoints"""
-
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
+    http_method_names = ["get", "post", "delete", "patch"]
 
     def get_queryset(self):
         qs: QuerySet = super().get_queryset()
