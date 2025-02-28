@@ -23,9 +23,12 @@ class CardViewSet(ModelViewSet):
     http_method_names = ["get", "post", "delete", "patch"]
 
     def get_queryset(self):
-        qs: QuerySet = super().get_queryset()
+        qs: QuerySet = super().get_queryset().filter(user=self.request.user)
 
-        return qs.filter(user=self.request.user)
+        if self.action == "list" or self.action == "retrieve":
+            return qs.select_related("card_state").prefetch_related("notes")
+
+        return qs
 
     def get_serializer_class(self):
         if self.action == "create" or self.action == "partial_update":
