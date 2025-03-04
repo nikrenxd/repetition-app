@@ -43,3 +43,11 @@ class TestCardAPI:
         )
 
         assert response.status_code == 204
+
+    def test_card_state_update(self, authenticated_client):
+        data = {"answered": True, "deck": 1}
+        response = authenticated_client.patch(
+            reverse("cards-update-card-state", kwargs={"pk": 1}), data=data
+        )
+
+        assert response.status_code == 200
