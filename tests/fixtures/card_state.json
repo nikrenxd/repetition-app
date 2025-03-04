@@ -1,0 +1,9 @@
+[
+   {
+      "model":"cards.cardstate",
+      "pk":1,
+      "fields":{
+        "card":1
+      }
+   }
+]

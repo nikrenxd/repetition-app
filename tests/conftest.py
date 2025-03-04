@@ -15,6 +15,7 @@ def django_db_setup(django_db_setup, django_db_blocker):
         call_command("loaddata", "./tests/fixtures/users.json")
         call_command("loaddata", "./tests/fixtures/decks.json")
         call_command("loaddata", "./tests/fixtures/cards.json")
+        call_command("loaddata", "./tests/fixtures/card_state.json")
         call_command("loaddata", "./tests/fixtures/notes.json")
 
 

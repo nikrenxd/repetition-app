@@ -9,5 +9,16 @@
          "deck": 1,
          "user":1
       }
+   },
+   {
+      "model":"cards.card",
+      "pk":2,
+      "fields":{
+         "created_at":"2025-02-05T14:11:45.825Z",
+         "question": "test question",
+         "answer": "test answer",
+         "deck": 1,
+         "user":1
+      }
    }
 ]
