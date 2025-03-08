@@ -34,7 +34,7 @@ class DeckViewSet(viewsets.ModelViewSet):
         if self.action == "list":
             return qs.annotate(cards_num=Count("cards"))
         if self.action == "retrieve":
-            return qs.prefetch_related("cards__card_state")
+            return qs.prefetch_related("cards__card_state", "cards__notes")
 
         return qs
 
