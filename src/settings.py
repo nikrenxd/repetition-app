@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "drf_spectacular",
     "silk",
+    "django_filters",
     # local
     "src.apps.users",
     "src.apps.decks",
@@ -164,6 +165,10 @@ REST_FRAMEWORK = {
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.OrderingFilter",
+    ),
 }
 
 ACCESS_TOKEN_EXPIRE_MINUTES = timedelta(minutes=config.ACCESS_TOKEN_EXPIRES)
