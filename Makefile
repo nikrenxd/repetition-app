@@ -6,8 +6,12 @@ run:
 test:
 	docker compose exec web-app pytest
 
+.PHONY: up
+up:
+	docker compose -f docker-compose.yml up
+
 .PHONY: build
-up-build:
+build:
 	docker compose -f docker-compose.yml up --build
 
 .PHONY: down
