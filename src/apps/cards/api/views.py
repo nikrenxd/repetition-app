@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
+from django_filters import rest_framework as filters
+
 from src.apps.cards.api.serializers import (
     CardSerializer,
     CardCreateUpdateSerializer,
@@ -16,10 +18,21 @@ from src.apps.cards.permissions import CardCurrentUserOwnDeckPermission
 from src.apps.cards.services import CardService
 
 
+class CardFilter(filters.FilterSet):
+    class Meta:
+        model = Card
+        fields = {
+            "question": ["icontains"],
+            "deck__name": ["icontains"],
+        }
+
+
 class CardViewSet(ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
     permission_classes = (IsAuthenticated, CardCurrentUserOwnDeckPermission)
+    filterset_class = CardFilter
+    ordering_fields = ["question", "created_at"]
     http_method_names = ["get", "post", "delete", "patch"]
 
     def get_queryset(self):
