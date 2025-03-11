@@ -20,6 +20,10 @@ class DeckRetrieveSerializer(serializers.ModelSerializer):
         fields = ("name", "description", "cards")
 
 
+class DeckEndSerializer(serializers.Serializer):
+    complete = serializers.BooleanField(default=False)
+
+
 class DeckCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deck
