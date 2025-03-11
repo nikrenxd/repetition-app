@@ -29,6 +29,24 @@ class TestDeckAPI:
         assert response.status_code == 200
 
     def test_decks_delete(self, authenticated_client):
-        response = authenticated_client.delete(reverse("decks-detail", kwargs={"pk": 1}))
+        response = authenticated_client.delete(
+            reverse("decks-detail", kwargs={"pk": 1})
+        )
 
         assert response.status_code == 204
+
+    def test_decks_start_deck(self, authenticated_client):
+        response = authenticated_client.get(
+            reverse("decks-start-deck", kwargs={"pk": 1})
+        )
+
+        assert response.status_code == 200
+
+    def test_decks_end_deck_redirect(self, authenticated_client):
+        data = {"complete": True}
+        response = authenticated_client.patch(
+            reverse("decks-end-deck", kwargs={"pk": 1}),
+            data=data,
+        )
+
+        assert response.status_code == 302
