@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
+from corsheaders.defaults import default_headers
+
 from src.config.base import config
 from src.config.db import db_config
 from src.config.redis import redis_config
@@ -159,6 +161,13 @@ AUTH_USER_MODEL = "users.User"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
+
+
+CORS_ALLOW_HEADERS = [
+    *default_headers,
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
