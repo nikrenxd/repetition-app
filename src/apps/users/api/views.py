@@ -1,7 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
+from rest_framework import status
+from rest_framework.decorators import action
 
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from src.apps.users.api.serializers import UserCreateSerializer, UserSerializer
@@ -37,3 +40,10 @@ class UserViewSet(GenericViewSet, CreateRetrieveUpdateMixin):
     def perform_create(self, serializer):
         data = serializer.validated_data
         UserService.create_user(User, **data)
+
+    @action(detail=False, methods=["GET"])
+    def me(self, request):
+        user = self.request.user
+        serializer = self.get_serializer(user)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
