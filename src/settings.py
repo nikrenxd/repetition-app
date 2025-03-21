@@ -196,6 +196,7 @@ REST_AUTH = {
     "JWT_AUTH_COOKIE": "access_token",
     "JWT_AUTH_REFRESH_COOKIE": "refresh_token",
     "TOKEN_MODEL": None,
+    "JWT_AUTH_SAMESITE": "Lax",
 }
 
 CELERY_BROKER_URL = redis_config.redis_url
