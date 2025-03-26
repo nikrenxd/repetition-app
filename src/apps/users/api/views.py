@@ -39,7 +39,8 @@ class UserViewSet(GenericViewSet, CreateRetrieveUpdateMixin):
 
     def perform_create(self, serializer):
         data = serializer.validated_data
-        UserService.create_user(User, **data)
+        user = UserService.create_user(User, **data)
+        UserService.create_user_statistic(user)
 
     @action(detail=False, methods=["GET"])
     def me(self, request):
