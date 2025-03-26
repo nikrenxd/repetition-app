@@ -21,7 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class UserStatistics(models.Model):
+class UserStatistic(models.Model):
     total_cards = models.PositiveIntegerField(default=0)
     completed_cards = models.PositiveIntegerField(default=0)
 
