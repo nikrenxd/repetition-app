@@ -19,3 +19,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class UserStatistics(models.Model):
+    total_cards = models.PositiveIntegerField(default=0)
+    completed_cards = models.PositiveIntegerField(default=0)
+
+    total_decks = models.PositiveIntegerField(default=0)
+    completed_decks = models.PositiveIntegerField(default=0)
+    completed_decks_percentage = models.PositiveIntegerField(default=0)
+
+    user = models.OneToOneField(
+        User,
+        related_name="user_statistics",
+        on_delete=models.CASCADE,
+    )
