@@ -11,3 +11,10 @@ def test_create_user(user_credentials):
     user = UserService.create_user(User, **user_credentials)
 
     assert user.email == "user1@mail.com"
+
+
+@pytest.mark.django_db
+def test_create_user_statistic(user):
+    user_stats = UserService.create_user_statistic(user)
+
+    assert user_stats.user == user
