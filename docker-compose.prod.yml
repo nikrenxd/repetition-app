@@ -2,7 +2,7 @@ services:
   web-app:
     build: .
     command: gunicorn src.wsgi:application --bind 0.0.0.0:${APP_PORT}
-    env_file: .env
+    env_file: environments/.env
     volumes:
       - static:/app/src/staticfiles
     depends_on:
@@ -41,7 +41,7 @@ services:
     command: celery -A src worker --loglevel=info
     volumes:
       - ./src/:/app/src/
-    env_file: .env
+    env_file: environments/.env
     depends_on:
       - db
       - redis

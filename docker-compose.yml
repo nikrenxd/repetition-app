@@ -3,7 +3,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
-      - dev.env
+      - environments/dev.env
     volumes:
       - .:/app/
     ports:
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./src/:/app/src/
     env_file:
-      - dev.env
+      - environments/dev.env
     depends_on:
       - db
       - redis
