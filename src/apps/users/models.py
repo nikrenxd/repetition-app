@@ -22,9 +22,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class UserStatistic(models.Model):
-    total_cards = models.PositiveIntegerField(default=0)
-    completed_cards = models.PositiveIntegerField(default=0)
-
     total_decks = models.PositiveIntegerField(default=0)
     completed_decks = models.PositiveIntegerField(default=0)
     completed_decks_percentage = models.PositiveIntegerField(default=0)
@@ -34,3 +31,6 @@ class UserStatistic(models.Model):
         related_name="user_statistics",
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        db_table = "users_user_statistic"
