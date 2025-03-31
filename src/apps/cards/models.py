@@ -28,3 +28,4 @@ class CardState(models.Model):
 
     class Meta:
         verbose_name = "card_state"
+        db_table = "cards_card_state"
