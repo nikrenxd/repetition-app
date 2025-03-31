@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
 from rest_framework import status
 from rest_framework.decorators import action
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -9,12 +10,16 @@ from rest_framework.viewsets import GenericViewSet
 
 from src.apps.users.api.serializers import UserCreateSerializer, UserSerializer
 from src.apps.users.services import UserService
-from src.common.mixins import CreateRetrieveUpdateMixin
 
 User = get_user_model()
 
 
-class UserViewSet(GenericViewSet, CreateRetrieveUpdateMixin):
+class UserViewSet(
+    GenericViewSet,
+    CreateModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
