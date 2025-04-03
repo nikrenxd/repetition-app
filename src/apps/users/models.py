@@ -24,7 +24,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 class UserStatistic(models.Model):
     total_decks = models.PositiveIntegerField(default=0)
     completed_decks = models.PositiveIntegerField(default=0)
-    completed_decks_percentage = models.PositiveIntegerField(default=0)
+    completed_decks_percentage = models.DecimalField(
+        default=0.00,
+        max_digits=5,
+        decimal_places=2,
+    )
 
     user = models.OneToOneField(
         User,
