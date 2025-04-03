@@ -95,10 +95,15 @@ class DeckViewSet(viewsets.ModelViewSet):
     )
     def end_deck(self, request: Request, pk=None):
         deck = self.get_object()
+        user_id = self.request.user.id
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         if serializer.validated_data["complete"]:
             DeckServices.deck_completed(deck)
+            DeckServices.deck_update_decks_statistic(
+                qs=self.get_queryset(),
+                user_id=user_id,
+            )
 
         return HttpResponseRedirect(redirect_to=reverse("decks-list"))
