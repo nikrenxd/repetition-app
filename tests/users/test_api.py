@@ -27,3 +27,8 @@ class TestUserAPI:
         response = authenticated_client.get(reverse("users-me"))
 
         assert response.status_code == 200
+
+    def test_users_current_user_statistic(self, authenticated_client):
+        response = authenticated_client.get(reverse("users-current-user-statistic"))
+
+        assert response.status_code == 200
