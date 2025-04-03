@@ -1,4 +1,8 @@
+from django.db.models import QuerySet, Count, Q
+
+
 from src.apps.decks.models import Deck
+from src.apps.users.models import UserStatistic
 
 
 class DeckServices:
@@ -20,3 +24,14 @@ class DeckServices:
             return True
         elif not_answered_cards_in_deck != 0 and deck.completed is True:
             DeckServices.deck_change_completed(deck, False)
+
+    @staticmethod
+    def deck_update_decks_statistic(qs: QuerySet[Deck], user_id: int):
+        decks_stats = qs.aggregate(
+            total_decks=Count("id"),
+            completed_decks=Count("id", filter=Q(completed=True)),
+        )
+
+        stats = UserStatistic.objects.filter(user_id=user_id).update(**decks_stats)
+
+        return stats
