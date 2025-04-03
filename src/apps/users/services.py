@@ -1,6 +1,8 @@
 import logging
 
 from django.db import DatabaseError
+from django.db.models import Count, Q, F, FloatField, QuerySet
+from django.db.models.functions import Cast, Round
 
 from src.apps.users.models import User, UserStatistic
 
@@ -24,3 +26,25 @@ class UserService:
             return user_stats
         except DatabaseError as e:
             logger.error(f"Error when creating user stats: {e}")
+
+    @staticmethod
+    def get_user_statistic(qs: QuerySet[User]):
+        try:
+            statistic = (
+                qs.annotate(
+                    total_decks=Count("decks"),
+                    completed_decks=Count("decks", filter=Q(decks__completed=True)),
+                )
+                .annotate(
+                    completed_decks_percentage=Round(
+                        Cast(F("completed_decks"), FloatField())
+                        / Cast(F("total_decks"), FloatField()),
+                        precision=2,
+                    ),
+                )
+                .first()
+            )
+
+            return statistic
+        except DatabaseError as e:
+            logger.error(f"Error when getting user statistic: {e}")
