@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from django.contrib.auth import get_user_model
 
+from src.apps.users.models import UserStatistic
 
 User = get_user_model()
 
@@ -18,6 +19,16 @@ class UserCreateSerializer(serializers.ModelSerializer):
         model = User
         fields = ("email", "password")
         extra_kwargs = {"password": {"write_only": True}}
+
+
+class UserStatisticSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserStatistic
+        fields = (
+            "total_decks",
+            "completed_decks",
+            "completed_decks_percentage",
+        )
 
 
 class EmailLoginSerializer(LoginSerializer):
