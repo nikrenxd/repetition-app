@@ -89,7 +89,8 @@ class DeckViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=["patch"],
+        methods=["post"],
+        url_path="end-deck",
         serializer_class=DeckEndSerializer,
     )
     def end_deck(self, request: Request, pk=None):
