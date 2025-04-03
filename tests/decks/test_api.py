@@ -44,7 +44,7 @@ class TestDeckAPI:
 
     def test_decks_end_deck_redirect(self, authenticated_client):
         data = {"complete": True}
-        response = authenticated_client.patch(
+        response = authenticated_client.post(
             reverse("decks-end-deck", kwargs={"pk": 1}),
             data=data,
         )
