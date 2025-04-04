@@ -231,6 +231,11 @@ LOGGING = {
             "handlers": ["console"],
             "propagate": False,
         },
+        "src.apps.decks": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": False,
+        },
         "src.apps.cards": {
             "level": "INFO",
             "handlers": ["console"],
