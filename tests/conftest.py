@@ -5,7 +5,6 @@ from django.core.management import call_command
 from rest_framework.test import APIClient
 
 from src.apps.decks.models import Deck
-from src.apps.users.models import UserStatistic
 
 
 @pytest.fixture(scope="session")
