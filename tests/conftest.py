@@ -1,7 +1,11 @@
+from re import S
 import pytest
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from rest_framework.test import APIClient
+
+from src.apps.decks.models import Deck
+from src.apps.users.models import UserStatistic
 
 
 @pytest.fixture(scope="session")
@@ -22,6 +26,16 @@ def django_db_setup(django_db_setup, django_db_blocker):
 @pytest.fixture(scope="function")
 def user(db):
     return get_user_model().objects.first()
+
+
+@pytest.fixture(scope="function")
+def deck(db):
+    return Deck.objects.get(id=1)
+
+
+@pytest.fixture(scope="function")
+def deck_qs(db, user):
+    return Deck.objects.filter(user=user)
 
 
 @pytest.fixture(scope="session")
