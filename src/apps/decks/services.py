@@ -34,13 +34,15 @@ class DeckServices:
             logger.error(f"Error when updating deck completion state {e}")
 
     @staticmethod
-    def deck_update_decks_statistic(qs: QuerySet[Deck], user_id: int):
+    def deck_update_decks_statistic(
+        qs: QuerySet[Deck], user_id: int
+    ) -> dict[str, int] | None:
         try:
             decks_stats = qs.aggregate(
                 total_decks=Count("id"),
                 completed_decks=Count("id", filter=Q(completed=True)),
             )
-
             UserStatistic.objects.filter(user_id=user_id).update(**decks_stats)
+            return decks_stats
         except DatabaseError as e:
             logger.error(f"Error when updating deck statistic {e}")
