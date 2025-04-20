@@ -12,29 +12,29 @@ logger = logging.getLogger(__name__)
 
 class DeckServices:
     @staticmethod
-    def deck_change_completed(deck: Deck, value: bool) -> bool:
+    def change_deck_state(deck: Deck, value: bool) -> bool:
         deck.completed = value
         deck.save()
 
         return value
 
     @staticmethod
-    def deck_completed(deck: Deck) -> bool | None:
+    def complete_deck(deck: Deck) -> bool | None:
         try:
             not_answered_cards_in_deck = deck.cards.filter(
                 card_state__answered=False
             ).count()
 
             if not_answered_cards_in_deck == 0:
-                DeckServices.deck_change_completed(deck, True)
+                DeckServices.change_deck_state(deck, True)
                 return True
             elif not_answered_cards_in_deck != 0 and deck.completed is True:
-                DeckServices.deck_change_completed(deck, False)
+                DeckServices.change_deck_state(deck, False)
         except DatabaseError as e:
             logger.error(f"Error when updating deck completion state {e}")
 
     @staticmethod
-    def deck_update_decks_statistic(
+    def update_deck_statistic(
         qs: QuerySet[Deck], user_id: int
     ) -> dict[str, int] | None:
         try:

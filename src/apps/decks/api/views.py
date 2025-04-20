@@ -100,8 +100,8 @@ class DeckViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
 
         if serializer.validated_data["complete"]:
-            DeckServices.deck_completed(deck)
-            DeckServices.deck_update_decks_statistic(
+            DeckServices.complete_deck(deck)
+            DeckServices.update_deck_statistic(
                 qs=self.get_queryset(),
                 user_id=user_id,
             )
