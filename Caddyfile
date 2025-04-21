@@ -1,5 +1,11 @@
+{
+    email {$EMAIL}
+}
+
 {$DOMAIN} {
-    handle {
-        reverse_proxy localhost:{$APP_PORT}
+    handle_path /static/* {
+        root * /usr/share/caddy/static
     }
+
+    reverse_proxy web-app:{$APP_PORT}
 }
