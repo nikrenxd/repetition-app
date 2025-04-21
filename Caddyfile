@@ -5,6 +5,7 @@
 {$DOMAIN} {
     handle_path /static/* {
         root * /usr/share/caddy/static
+        file_server
     }
 
     reverse_proxy web-app:{$APP_PORT}
