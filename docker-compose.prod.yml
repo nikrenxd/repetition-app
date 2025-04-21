@@ -1,8 +1,8 @@
 services:
   web-app:
     build: .
+    env_file: .env
     command: gunicorn src.wsgi:application --bind 0.0.0.0:${APP_PORT}
-    env_file: environments/.env
     volumes:
       - static:/app/src/staticfiles
     depends_on:
@@ -12,10 +12,7 @@ services:
   db:
     image: postgres:16-alpine3.21
     hostname: database
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    env_file: .env
     ports:
       - "${DB_PORT}:5432"
     volumes:
@@ -34,14 +31,15 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
       - caddy-config:/config
+      - static:/usr/share/caddy/static
 
   celery-worker:
     build: .
+    env_file: .env
     hostname: worker-1
     command: celery -A src worker --loglevel=info
     volumes:
       - ./src/:/app/src/
-    env_file: environments/.env
     depends_on:
       - db
       - redis
