@@ -25,13 +25,12 @@ To launch project on VPS, you will need to do few steps before run it
 ```
 
 ### After launching project
-After you launch project, create database tables with 2 commands
+After you launch project, create database tables
 ```shell
   docker compose exec web-app python manage.py migrate
 ```
 Creating database tables for prod environment
 ```shell
-  docker compose exec -f docker-compose.prod.yml web-app python manage.py makemigrations
   docker compose exec -f docker-compose.prod.yml web-app python manage.py migrate
 ```
 
